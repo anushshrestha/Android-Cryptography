@@ -29,7 +29,7 @@ public class Vigenere extends Ciphers implements View.OnClickListener{
         Bundle fromCaesarConfig = getIntent().getExtras();
         if (fromCaesarConfig != null) {
             vigKey = fromCaesarConfig.getString("vigkey");
-            setContentView(R.layout.view);
+            setContentView(R.layout.encryptdecrypt);
             msg = (EditText) findViewById(R.id.etmsg);
             tv = (TextView) findViewById(R.id.tvresult);
             encrypt = (Button) findViewById(R.id.bencrypt);
@@ -52,7 +52,11 @@ public class Vigenere extends Ciphers implements View.OnClickListener{
             char charOfKey = vigKey.charAt(i % vigKey.length());
             char charOfPlainText = arrayOfPlainText[i];
 
-            //find index of character in msg using ALPHABET and point that index to string
+            //find index of character in planText using ALPHABET
+            //find index of character of key using ALPHABET
+            //msg+Key=cipher
+            //add them and get char of that index from alphabet
+            //add that char to string cipherText and return
             int shiftedPosition = ((ALPHABET.indexOf(Character.valueOf(charOfPlainText)))+
                                     ALPHABET.indexOf(Character.valueOf(charOfKey)))% ALPHABET.size();
 
@@ -71,6 +75,9 @@ public class Vigenere extends Ciphers implements View.OnClickListener{
         for (int i = 0; i < cipherText.length(); i++) {
             char charOfKey = vigKey.charAt(i % vigKey.length());
             char charOfcipherText = arrayOfcipherText[i];
+
+            //msg=cipher -key
+            //kist add alphabet size to prevent from negative value
 
             int shiftedPosition = (ALPHABET.size()+
                     ((ALPHABET.indexOf(Character.valueOf(charOfcipherText)))-

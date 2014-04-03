@@ -30,8 +30,9 @@ public class Caesar extends Ciphers implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Bundle fromCaesarConfig = getIntent().getExtras();
         if (fromCaesarConfig != null) {
+            //if rotate value sent from config found the here
             rotate = fromCaesarConfig.getInt("rotation");
-            setContentView(R.layout.view);
+            setContentView(R.layout.encryptdecrypt);
             msg = (EditText) findViewById(R.id.etmsg);
             tv = (TextView) findViewById(R.id.tvresult);
             encrypt = (Button) findViewById(R.id.bencrypt);
@@ -41,17 +42,30 @@ public class Caesar extends Ciphers implements View.OnClickListener {
             encrypt.setOnClickListener(this);
 
         } else {
-            Toast.makeText(this, "Intent extra not found.", Toast.LENGTH_SHORT).show();
+            //else by default shift by 3
+            rotate = 3;
+            setContentView(R.layout.encryptdecrypt);
+            msg = (EditText) findViewById(R.id.etmsg);
+            tv = (TextView) findViewById(R.id.tvresult);
+            encrypt = (Button) findViewById(R.id.bencrypt);
+            decrypt = (Button) findViewById(R.id.bdecrypt);
+
+            decrypt.setVisibility(View.INVISIBLE);
+            encrypt.setOnClickListener(this);
+
         }
     }
 
     @Override
     public String encrypt(String plainText) {
+        //take plain text, create array of char
         String cipherText = "";
         char[] arrayOfPlainText = plainText.toCharArray();
         for (int i = 0; i < plainText.length(); i++) {
             char singleCharacter = arrayOfPlainText[i];
+            //find index of every character in alphabet array and increment by rotate...
             int shiftedPosition = (rotate + ALPHABET.indexOf(Character.valueOf(singleCharacter))) % ALPHABET.size();
+            //add every new character to cipherText and return
             cipherText += ALPHABET.get(shiftedPosition);
         }
         return cipherText;
@@ -63,6 +77,7 @@ public class Caesar extends Ciphers implements View.OnClickListener {
         char[] arrayOfPlainText = cipherText.toCharArray();
         for (int i = 0; i < cipherText.length(); i++) {
             char singleCharacter = arrayOfPlainText[i];
+            //reverse of encrypt but minus rotate might give negative value so, add 26 alphabet.size
             int shiftedPosition = (ALPHABET.size() + (ALPHABET.indexOf(Character.valueOf(singleCharacter))-rotate)) % ALPHABET.size();
             plainText += ALPHABET.get(shiftedPosition);
         }
@@ -88,6 +103,7 @@ public class Caesar extends Ciphers implements View.OnClickListener {
 
 
             case R.id.bencrypt:
+                //take value fron edit text and pass to encrypt fxn
 
                 if (msg.getText().toString().isEmpty())
                     Toast.makeText(this, "Msg empty.", Toast.LENGTH_SHORT).show();

@@ -12,6 +12,9 @@ import java.util.List;
  */
 public abstract class Ciphers extends Activity {
 
+    //this is abstract class and all the cipher extends this class and inherit the common array of alphabets
+    // and override the member functions ie encrypt and decrypt
+
 
     public static final List<Character> ALPHABET;
 
@@ -44,9 +47,12 @@ public abstract class Ciphers extends Activity {
         arrayOfCharacter1[24] = Character.valueOf('y');
         arrayOfCharacter1[25] = Character.valueOf('z');
         ALPHABET = Arrays.asList(arrayOfCharacter1);
+       //created a array of character and added a to z finally created array as list from them...
     }
 
 
+
+    //member fxn to be overriden by the child class
     public abstract String encrypt(String plainText);
 
     public abstract String decrypt(String cipherText);
