@@ -1,4 +1,4 @@
-package com.silentflutes.cryptography.Onetimepad;
+package com.silentflutes.cryptography.DES;
 
 import com.silentflutes.cryptography.Ciphers;
 
@@ -6,9 +6,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 /**
- * Created by sillentflutes on 4/1/14.
+ * Created by sillentflutes on 4/3/14.
  */
-public class Onetimepad extends Ciphers {
+public class DES extends Ciphers {
     @Override
     public String encrypt(String plainText) {
         return null;

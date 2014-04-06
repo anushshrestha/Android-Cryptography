@@ -30,7 +30,8 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
         Bundle fromMonoConfig = getIntent().getExtras();
         if (fromMonoConfig != null) {
             monoKey = fromMonoConfig.getString("monokey");
-            setContentView(R.layout.view);
+            //store key.
+            setContentView(R.layout.encryptdecrypt);
             msg = (EditText) findViewById(R.id.etmsg);
             tv = (TextView) findViewById(R.id.tvresult);
             encrypt = (Button) findViewById(R.id.bencrypt);
@@ -40,6 +41,7 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
             encrypt.setOnClickListener(this);
 
         } else {
+            //no default key
             Toast.makeText(this, "Intent extra not found.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -47,13 +49,14 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
     @Override
     public String encrypt(String plainText) {
         String cipherText = "";
+        //create array of char for plaint text and mono key
         char[] arrayOfPlainText = plainText.toCharArray();
         char []arrayOfMonoKey=monoKey.toCharArray();
-        for (int i = 0; i < plainText.length(); i++) {
 
+        for (int i = 0; i < plainText.length(); i++) {
             char charOfPlainText = arrayOfPlainText[i];
 
-            //find index of character in msg using ALPHABET and point that index to string
+            //find index of character in msg using ALPHABET and get char of that index from string
             int shiftedPosition = (ALPHABET.indexOf(Character.valueOf(charOfPlainText))) % ALPHABET.size();
             cipherText += arrayOfMonoKey[shiftedPosition];
         }
@@ -62,14 +65,14 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
 
     @Override
     public String decrypt(String cipherText) {
+
         String plainText = "";
         char[] arrayOfcipherText = cipherText.toCharArray();
 
         for (int i = 0; i < cipherText.length(); i++) {
-
             char charOfcipherText = arrayOfcipherText[i];
-
-            int shiftedPosition = (cipherText.indexOf(Character.valueOf(charOfcipherText))) % cipherText.length();
+            //find index of character in cipherText and get char of that index from alphabet
+            int shiftedPosition = (monoKey.indexOf(Character.valueOf(charOfcipherText))) % monoKey.length();
             plainText += ALPHABET.get(shiftedPosition);
         }
         return plainText;
@@ -89,7 +92,7 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 
-
+            //same as other
             case R.id.bencrypt:
 
                 if (msg.getText().toString().isEmpty())
@@ -105,7 +108,7 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
                     Toast.makeText(this, "Cipher text lost.", Toast.LENGTH_SHORT).show();
 
                 tv.setText(decrypt(tv.getText().toString().toLowerCase().trim()));
-
+                decrypt.setVisibility(View.INVISIBLE);
 
                 break;
 

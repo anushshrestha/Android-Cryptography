@@ -18,6 +18,8 @@ public class Vigenereconfigure extends Activity{
     EditText vigenereKey;
     Button vignereDone;
 
+
+    //same idea as monoalphabetic, getting key and passing to vignere class
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
