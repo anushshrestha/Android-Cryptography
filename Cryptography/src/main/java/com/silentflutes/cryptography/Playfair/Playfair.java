@@ -1,10 +1,5 @@
 package com.silentflutes.cryptography.Playfair;
 
-import com.silentflutes.cryptography.Ciphers;
-import com.silentflutes.cryptography.R;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +7,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.silentflutes.cryptography.Ciphers;
+import com.silentflutes.cryptography.R;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,23 +20,25 @@ import java.util.Random;
 /**
  * Created by sillentflutes on 4/1/14.
  */
-public class Playfair extends Ciphers implements View.OnClickListener{
-
+public class Playfair extends Ciphers implements View.OnClickListener {
     /*
         some of the comment includes alternative implementations and error in process of reaching current code.
      */
-
-    private String m_key = "";
-    private char[][] m_keyMatrix;
     EditText msg;
     TextView tv;
     Button encrypt, decrypt;
+    private String m_key = "";
+    private char[][] m_keyMatrix;
     private ArrayList<Integer> noOfJ = new ArrayList<Integer>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //matrix is not created until the user clicks the encrypt button
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.encryptdecrypt);
@@ -56,6 +58,7 @@ public class Playfair extends Ciphers implements View.OnClickListener{
         return m_keyMatrix;
     }
     */
+
     @Override
     public void onClick(View v) {
 
@@ -74,9 +77,10 @@ public class Playfair extends Ciphers implements View.OnClickListener{
                 break;
 
             case R.id.bdecrypt:
-                String cipher=tv.getText().toString().trim();
+                String cipher = tv.getText().toString().trim();
                 String plainText = decrypt(cipher);
                 tv.setText(plainText);
+                decrypt.setVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -121,7 +125,7 @@ public class Playfair extends Ciphers implements View.OnClickListener{
 
     public void savePositionOfJ(String msg) {
         int base_index = msg.indexOf("j");
-        if(base_index==-1)
+        if (base_index == -1)
             noOfJ.add(0);
             //if j does not exist then 0 is added to oth location of array list no of j
         else
@@ -256,7 +260,9 @@ public class Playfair extends Ciphers implements View.OnClickListener{
 
     private String getEncryptionSubstitution(Character char1, Character char2, int paramInt) {
 
-        //COULDNOT MERGER THE SUBSTITUTION CLASS FOR ENCRYPTION AND DECRYPTION :(
+         //COULDNOT MERGER THE SUBSTITUTION CLASS FOR ENCRYPTION AND DECRYPTION :(
+
+        //paramInt is flag where 0=encryption 1=decryption
 
         char[] arrayOfChar = new char[2];
         int[] arrayOfInt2;
@@ -408,33 +414,34 @@ public class Playfair extends Ciphers implements View.OnClickListener{
         return afterSubstiution.trim();
 
     }
+
     public String restoreJ(String plainText) {
         char[] arrayOfPlainText = plainText.toCharArray();
-        if(noOfJ.get(0)==0)
+        if (noOfJ.get(0) == 0)
             //if no j is added then the list is empty
-            return null ;
+            return null;
         else {
             //if the no of j is added in the list
-                    // String restoredJPlainText = "";
+            // String restoredJPlainText = "";
             for (int i = 0; i < noOfJ.size(); i++) {
                 Integer positionOfJ = noOfJ.get(Integer.valueOf(i));
                 arrayOfPlainText[positionOfJ] = 'j';
             }
             plainText = String.valueOf(arrayOfPlainText);
-        // for(int k=0;k<=plainText.length();k++){
-        // restoredJPlainText=restoredJPlainText+arrayOfPlainText[k];
-        // }
+            // for(int k=0;k<=plainText.length();k++){
+            // restoredJPlainText=restoredJPlainText+arrayOfPlainText[k];
+            // }
             return plainText.trim();
         }
     }
 
     public String removeFillers(String msg) {
         int size = msg.length();
-        char []charOfMsg=msg.toCharArray();
+        char[] charOfMsg = msg.toCharArray();
 
         String withoutFiller = "";
         int counter = 0;
-        for (int i = 0; i < size/2; i++) {
+        for (int i = 0; i < size / 2; i++) {
             String groupOfTwo = msg.substring(counter, counter + 2);
             char[] arrayOfTwo = groupOfTwo.toCharArray();
             //2nd must be x to be removed
@@ -444,14 +451,14 @@ public class Playfair extends Ciphers implements View.OnClickListener{
                     withoutFiller = withoutFiller + arrayOfTwo[0];
                 } else {
                     //after ward character exists
-                    int afterPosition=counter+2;
-                    Character c =charOfMsg[afterPosition];
+                    int afterPosition = counter + 2;
+                    Character c = charOfMsg[afterPosition];
                     if (arrayOfTwo[0] == c)
                         //2nd and two side same, take
                         withoutFiller = withoutFiller + arrayOfTwo[0];
 
                 }
-                counter=counter+2;
+                counter = counter + 2;
             } else {
                 withoutFiller = withoutFiller + groupOfTwo;
                 counter = counter + 2;

@@ -16,25 +16,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.silentflutes.cryptography.Caesar.Caesar" android:label="@string/app_name" />
-        <activity android:name=".Caesar.Caesarconfigure" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Caesar.Caesar" android:label="Caesar cipher" />
+        <activity android:name=".Caesar.Caesarconfigure" android:label="Caesar cipher" />
 
-        <activity android:name="com.silentflutes.cryptography.Hill.Hill" android:label="@string/app_name" />
-        <activity android:name="com.silentflutes.cryptography.Hill.Hillconfigure" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Hill.Hill" android:label="Hill Cipher" />
+        <activity android:name="com.silentflutes.cryptography.Hill.Hillconfigure" android:label="Hill Cipher" />
 
-        <activity android:name="com.silentflutes.cryptography.Monoalphabetic.Monoalphabeticconfigure" android:label="@string/app_name" />
-        <activity android:name="com.silentflutes.cryptography.Monoalphabetic.Monoalphabetic" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Monoalphabetic.Monoalphabeticconfigure" android:label="Monoalphabetic" />
+        <activity android:name="com.silentflutes.cryptography.Monoalphabetic.Monoalphabetic" android:label="Monoalphabetic" />
 
 
 
-        <activity android:name="com.silentflutes.cryptography.Playfair.Playfair" android:label="@string/app_name" />
-        <activity android:name="com.silentflutes.cryptography.Playfair.Playfairconfigure" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Playfair.Playfair" android:label="Playfair" />
+        <activity android:name="com.silentflutes.cryptography.Playfair.Playfairconfigure" android:label="Playfair" />
 
-        <activity android:name="com.silentflutes.cryptography.Vernam.Vernam" android:label="@string/app_name" />
-        <activity android:name="com.silentflutes.cryptography.Vernam.Vernamconfigure" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Vernam.Vernam" android:label="Vernam" />
+        <activity android:name="com.silentflutes.cryptography.Vernam.Vernamconfigure" android:label="Vernam" />
 
-        <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenere" android:label="@string/app_name" />
-        <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenereconfigure" android:label="@string/app_name" />
+        <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenere" android:label="Vigenere" />
+        <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenereconfigure" android:label="Vigenere" />
 
     </application>
 
