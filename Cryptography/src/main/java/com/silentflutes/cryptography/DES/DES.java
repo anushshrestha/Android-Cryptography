@@ -328,9 +328,11 @@ public class DES extends Ciphers implements View.OnClickListener {
             //8 group of 6
             int [][]groupOfSbox= new int [8][6];
             int k=0;
+
            for(int i=0;i<8;i++){
                for(int j=0;j<6;j++){
-                   if(j=5)
+                   //accesing the 6 bit pair
+
 
                    groupOfSbox[i][j]=expandedRightArray[k];
                    k++;
@@ -339,26 +341,29 @@ public class DES extends Ciphers implements View.OnClickListener {
 
            //creating decimal value to point to s box
 
-            int[][]pointersToSBox= new int [8][2];
-            int []rowPointer,columnPointer;
+            int [][]rowSbox= new int [8][2];
+            int rowSboxCounter,columnSboxCounter;
+            int [][]columnSbox= new int [8][4];
             for(int i=0;i<8;i++){
                 for(int j =0;j<6;j++){
+        //creating row and column pointer of the s box
 
-                    if(j==0 ||j==5 )
-                        rowPointer[]
-
-                   // int row =0;
-                    int column=1;
-                    int tempC,tempR;
-                    for(int l=0;l<4;l++){
-                   //     groupOfSboxColumn[i][row];
-                     //   groupOfSboxRow[i][column];
+                    rowSboxCounter=columnSboxCounter=0;
+                    if(j==0 || j==5){
+                        rowSbox[i][rowSboxCounter]=expandedRightArray[j];
+                    }else{
+                        columnSbox[i][columnSboxCounter]=expandedRightArray[j];
                     }
 
-
-//                    pointersToSBox[i][j]=Integer
                 }
             }
+        for(int i=0;i<8;i++){
+            for(int j=0;j<2;j++){
+                int  row= Integer.parseInt(Integer.toString(rowSbox[i][j]),2);
+
+            }
+        }
+
 
 
 
