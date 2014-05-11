@@ -31,6 +31,18 @@ public class DES extends Ciphers implements View.OnClickListener {
                     61, 53, 45, 37, 29, 21, 13, 5,
                     63, 55, 47, 39, 31, 23, 15, 7
             };
+//final permuatation after round function and swap
+    private static final int[] inverseInitialPermutation = {
+            40, 8, 48, 16, 56, 24, 64, 32,
+            39, 7, 47, 15, 55, 23, 63, 31,
+            38, 6, 46, 14, 54, 22, 62, 30,
+            37, 5, 45, 13, 53, 21, 61, 29,
+            36, 4, 44, 12, 52, 20, 60, 28,
+            35, 3, 43, 11, 51, 19, 59, 27,
+            34, 2, 42, 10, 50, 18, 58, 26,
+            33, 1, 41, 9, 49, 17, 57, 25
+    };
+
     //expand left(32 bit to 48)
     static int[] expand32to48 =
             {
@@ -85,6 +97,18 @@ public class DES extends Ciphers implements View.OnClickListener {
             7,  11, 4,  1,  9,  12, 14, 2,  0,  6,  10, 13, 15, 3,  5,  8,
             2,  1,  14, 7,  4,  10, 8,  13, 15, 12, 9,  0,  3,  5,  6,  11
     } };
+
+     static final int[] afterSboxPermutation = {
+            16, 7,  20, 21,
+            29, 12, 28, 17,
+            1,  15, 23, 26,
+            5,  18, 31, 10,
+            2,  8,  24, 14,
+            32, 27, 3,  9,
+            19, 13, 30, 6,
+            22, 11, 4,  25
+    };
+
 
     //permutation to give f (for XOR operation with left)
     static int[] P = {
@@ -240,7 +264,7 @@ public class DES extends Ciphers implements View.OnClickListener {
                     26, 8, 16, 7, 27, 20, 13, 2,
                     41, 52, 31, 37, 47, 55, 30, 40,
                     51, 45, 33, 48, 44, 49, 39, 56,
-                    34, 53, 46, 42, 50, 36, 29, 32};//56 t0 48 bits
+                    34, 53, 46, 42, 50, 36, 29, 32 };//56 t0 48 bits
 
             int j, temp[] = new int[64];
             for (i = 0; i < 28; i++)
@@ -274,8 +298,6 @@ public class DES extends Ciphers implements View.OnClickListener {
 //get final value
 //left value is same as right value ..
 
-
-
     static int changeListOfKey=0;
     @Override
     public String encrypt(String plainText) {
@@ -296,17 +318,27 @@ public class DES extends Ciphers implements View.OnClickListener {
         int []rightArray =new int [32];
 
         int[] expandedRightArray = new int[48];
+
+
+        //START OF ROUND FUNCTION
+
+        ///group of two for first initiation...
+        for (int i = 0, j = 0; i < 64; i++) {
+            if (i < 32)
+                leftArray[i] = afterIp[i];
+            else {
+                rightArray[j] = afterIp[i];
+                j++;
+            }
+        }
+
         for(int round =0;round<16;round++) {
 
-            ///group of two
-            for (int i = 0, j = 0; i < 64; i++) {
-                if (i < 32)
-                    leftArray[i] = afterIp[i];
-                else {
-                    rightArray[j] = afterIp[i];
-                    j++;
-                }
-            }
+            //before replacing right array storing it in the temp
+            int []tempRightArray= new int [32];
+            for(int i =0;i<32;i++)
+                tempRightArray[i]=rightArray[i];
+
             //round function
             //expand 32 bit to 48 bit
 
@@ -354,23 +386,71 @@ public class DES extends Ciphers implements View.OnClickListener {
                     }else{
                         columnSbox[i][columnSboxCounter]=expandedRightArray[j];
                     }
-
                 }
             }
+            String afterSbox="";
+            String sBoxValueBinary="";
         for(int i=0;i<8;i++){
             for(int j=0;j<2;j++){
                 int  row= Integer.parseInt(Integer.toString(rowSbox[i][j]),2);
+                int column = Integer.parseInt(Integer.toString(columnSbox[i][j]),2);
+
+              int sBoxValue= sBoxArray[i][16*(row-1)+column];
+              sBoxValueBinary=hexValues[sBoxValue];
 
             }
+            afterSbox=afterSbox +sBoxValueBinary;
         }
 
+        //permutation after sbox value
+            //changing sbox value to array
+          /*  for(int i=0;i<16;i++)
+                for(int j=0;j<48;j++)
+                    listOfKey[i][j]=Integer.parseInt(Character.toString(Key.get(i).charAt(j)));*/
+            String  permuteSboxResult="";
+            for (int i = 0; i < 32; i++)
+                permuteSboxResult+= afterSbox.charAt(afterSboxPermutation[i]-1);
+
+            int []newRightArray= new int [32];
+
+            //xor with left
+            //create array of result after permutation of sbox result
+             for(int i=0;i<32;i++)
+                    newRightArray[i]=Integer.parseInt(Character.toString(permuteSboxResult.charAt(i)));
+
+
+
+            for (int i = 0; i < 32; i++) {
+                if (leftArray[i] != newRightArray[i])
+                    rightArray[i] = 1;
+                else
+                    rightArray[i] = 0; //48
+            }
+
+            //right array create
+            for(int i =0;i<32;i++)
+                leftArray[i]=tempRightArray[i];
+            //left array created
 
 
 
         }
+        String swapAfterRound="";
+        //swapping
+        for (int i = 0;i < 64; i++) {
+            if (i < 32)
+                swapAfterRound+= Integer.toString(rightArray[i]);
+            else {
+                swapAfterRound+= Integer.toString(leftArray[i-32]);
+            }
+        }
+        //final permuatation
+        String cipherText="";
+        for (int i = 0; i < 64; i++)
+            cipherText+= swapAfterRound.charAt(inverseInitialPermutation[i]-1);
+
        // changeListOfKey++;
-
-        return null;
+        return cipherText;
     }
 
     @Override

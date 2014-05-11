@@ -36,6 +36,8 @@
         <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenere" android:label="Vigenere" />
         <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenereconfigure" android:label="Vigenere" />
 
+        <activity android:name="com.silentflutes.cryptography.DES.DES" android:label="DES" />
+
     </application>
 
 </manifest>
