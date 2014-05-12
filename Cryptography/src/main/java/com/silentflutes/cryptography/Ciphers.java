@@ -53,7 +53,7 @@ public abstract class Ciphers extends Activity {
 
 
     //member fxn to be overriden by the child class
-    public abstract String encrypt(String plainText);
+    public abstract String encrypt(String plainText) throws Exception;
 
     public abstract String decrypt(String cipherText);
 
