@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.silentflutes.cryptography.Caesar.Caesarconfigure;
+import com.silentflutes.cryptography.DES.DES;
 import com.silentflutes.cryptography.DES.DESconfigure;
 import com.silentflutes.cryptography.Hill.Hillconfigure;
 import com.silentflutes.cryptography.Monoalphabetic.Monoalphabeticconfigure;
@@ -36,7 +37,7 @@ public class ListOfAlgorithm extends ListActivity {
         listOfAlgorithm.add(2, "Vigenere ");
         listOfAlgorithm.add(3, "Playfair ");
         listOfAlgorithm.add(4, "Hill");
-        listOfAlgorithm.add(5, "Vernam ");
+        listOfAlgorithm.add(5, "Vernam/One Time Pad ");
         listOfAlgorithm.add(6, "DES");
 
         //create a array adapter of type string that will bind array list created above and the encryptdecrypt of row of array list
@@ -87,7 +88,7 @@ public class ListOfAlgorithm extends ListActivity {
                  break;
 
              case 6:
-                 startActivity(new Intent(this, DESconfigure.class));
+                 startActivity(new Intent(this, DES.class));
 
                  break;
          }
