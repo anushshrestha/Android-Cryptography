@@ -54,6 +54,7 @@ public class Caesarconfigure extends Activity {
                 toCaesar.putExtra("rotation", rotate + 1);
                 toCaesar.setClass(Caesarconfigure.this, Caesar.class);
                 startActivity(toCaesar);
+
             }
         });
 

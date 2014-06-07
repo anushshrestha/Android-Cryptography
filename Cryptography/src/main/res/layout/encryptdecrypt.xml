@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="result"
         android:id="@+id/tvresult"
         android:layout_weight="0.05"
         android:padding="5dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:hint="Result" />
 
     <Button
         android:layout_width="371dp"

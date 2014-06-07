@@ -21,7 +21,6 @@ public class Monoalphabetic extends Ciphers implements View.OnClickListener {
     EditText msg;
     TextView tv;
     Button encrypt, decrypt;
-    String s = "";
     String monoKey;
 
     @Override

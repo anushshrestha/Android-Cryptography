@@ -84,7 +84,7 @@ public class ListOfAlgorithm extends ListActivity {
                  break;
 
              case 5:
-                 startActivity(new Intent(this, Vernam.class));
+                 startActivity(new Intent(this, Vernamconfigure.class));
 
                  break;
 
