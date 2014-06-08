@@ -25,6 +25,7 @@ public class Playfairconfigure  extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playfair_key);
+       //milan
 
         playfairKey=(EditText)findViewById(R.id.etplayfairkey);
         playfairDone=(Button)findViewById(R.id.bplayfairdone);

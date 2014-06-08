@@ -14,6 +14,7 @@ import com.silentflutes.cryptography.DES.DESconfigure;
 import com.silentflutes.cryptography.Hill.Hillconfigure;
 import com.silentflutes.cryptography.Monoalphabetic.Monoalphabeticconfigure;
 import com.silentflutes.cryptography.Playfair.Playfairconfigure;
+import com.silentflutes.cryptography.Vernam.Vernam;
 import com.silentflutes.cryptography.Vernam.Vernamconfigure;
 import com.silentflutes.cryptography.Vigenere.Vigenereconfigure;
 
@@ -83,7 +84,7 @@ public class ListOfAlgorithm extends ListActivity {
                  break;
 
              case 5:
-                 startActivity(new Intent(this, Vernamconfigure.class));
+                 startActivity(new Intent(this, Vernam.class));
 
                  break;
 

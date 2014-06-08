@@ -55,7 +55,6 @@ public class Caesarconfigure extends Activity {
                 toCaesar.setClass(Caesarconfigure.this, Caesar.class);
                 startActivity(toCaesar);
 
-
             }
         });
 

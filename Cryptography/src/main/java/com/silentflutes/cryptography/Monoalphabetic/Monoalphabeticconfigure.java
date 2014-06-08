@@ -78,7 +78,6 @@ public class Monoalphabeticconfigure extends Ciphers implements View.OnClickList
                 startActivity(toMono);
                 //pass random key for encrypt
                 break;
-
         }
     }
 

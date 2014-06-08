@@ -118,11 +118,7 @@ public class Caesar extends Ciphers implements View.OnClickListener {
                     Toast.makeText(this, "Cipher text lost.", Toast.LENGTH_SHORT).show();
 
                 tv.setText(decrypt(tv.getText().toString().toLowerCase().trim()));
-
-
                 break;
         }
-
-
     }
 }
