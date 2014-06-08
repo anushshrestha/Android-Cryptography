@@ -31,7 +31,6 @@
         <activity android:name="com.silentflutes.cryptography.Playfair.Playfairconfigure" android:label="Playfair" />
 
         <activity android:name="com.silentflutes.cryptography.Vernam.Vernam" android:label="Vernam" />
-        <activity android:name="com.silentflutes.cryptography.Vernam.Vernamconfigure" android:label="Vernam" />
 
         <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenere" android:label="Vigenere" />
         <activity android:name="com.silentflutes.cryptography.Vigenere.Vigenereconfigure" android:label="Vigenere" />
